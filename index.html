@@ -1,84 +1,23 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Evaluasi Strategi Pajak</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>Evaluasi Strategi Pajak</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Evaluasi Strategi Penghematan Pajak & Pencegahan Pemeriksaan</h1>
-        <p>(Jawab dengan "Ya" atau "Tidak")</p>
-
-        <form id="taxEvaluationForm">
-            <section class="category">
-                <h2>🔹 A. Efisiensi & Penghematan Pajak (Legal & Wajar)</h2>
-                <div class="question-group">
-                    <p class="question-text">1. Apakah perusahaan memanfaatkan seluruh insentif pajak yang berlaku (seperti PPh Final UMKM 0,5%, pengurangan angsuran, fasilitas PPN, dll) sesuai ketentuan?<br><small>(Insentif resmi = penghematan legal yang seharusnya dimanfaatkan)</small></p>
-                    <label><input type="radio" name="q1" value="yes" required> Ya</label>
-                    <label><input type="radio" name="q1" value="no"> Tidak</label>
-                </div>
-                <div class="question-group">
-                    <p class="question-text">2. Apakah biaya operasional yang diklaim sebagai pengurang penghasilan kena pajak benar-benar terjadi, mendukung usaha, dan memiliki bukti yang sah?<br><small>(Biaya tidak wajar atau tanpa bukti = risiko penolakan saat pemeriksaan)</small></p>
-                    <label><input type="radio" name="q2" value="yes" required> Ya</label>
-                    <label><input type="radio" name="q2" value="no"> Tidak</label>
-                </div>
-                <div class="question-group">
-                    <p class="question-text">3. Apakah perusahaan melakukan penyusutan dan amortisasi aset menurut ketentuan fiskal (bukan hanya akuntansi)?<br><small>(Penyusutan fiskal yang benar = pengurangan pajak tahunan yang sah)</small></p>
-                    <label><input type="radio" name="q3" value="yes" required> Ya</label>
-                    <label><input type="radio" name="q3" value="no"> Tidak</label>
-                </div>
-                <div class="question-group">
-                    <p class="question-text">4. Apakah perusahaan mempertimbangkan waktu transaksi (timing) untuk menunda laba atau mempercepat biaya dalam batas wajar?<br><small>(Contoh: percepat pembelian aset di akhir tahun untuk efisiensi pajak)</small></p>
-                    <label><input type="radio" name="q4" value="yes" required> Ya</label>
-                    <label><input type="radio" name="q4" value="no"> Tidak</label>
-                </div>
-                <div class="question-group">
-                    <p class="question-text">5. Apakah struktur penghasilan pemilik (gaji, bonus, dividen) dipertimbangkan dari sisi efisiensi pajak secara keseluruhan?<br><small>(Kombinasi gaji + dividen bisa lebih efisien daripada hanya dividen atau hanya gaji)</small></p>
-                    <label><input type="radio" name="q5" value="yes" required> Ya</label>
-                    <label><input type="radio" name="q5" value="no"> Tidak</label>
-                </div>
-                <div class="question-group">
-                    <p class="question-text">6. Apakah perusahaan memiliki pemisahan yang jelas antara keuangan pribadi dan keuangan usaha?<br><small>(Campur aduk = risiko penolakan biaya & pemeriksaan lebih dalam)</small></p>
-                    <label><input type="radio" name="q6" value="yes" required> Ya</label>
-                    <label><input type="radio" name="q6" value="no"> Tidak</label>
-                </div>
-            </section>
-
-            <section class="category">
-                <h2>🔹 B. Pencegahan Risiko Pemeriksaan & Audit Pajak</h2>
-                <div class="question-group">
-                    <p class="question-text">7. Apakah semua transaksi dengan pihak terkait (afiliasi, keluarga, atau perusahaan grup) dilakukan dengan harga wajar (arm’s length price)?<br><small>(Transaksi tidak wajar = trigger utama pemeriksaan dan penyesuaian fiskal)</small></p>
-                    <label><input type="radio" name="q7" value="yes" required> Ya</label>
-                    <label><input type="radio" name="q7" value="no"> Tidak</label>
-                </div>
-                <div class="question-group">
-                    <p class="question-text">8. Apakah perusahaan memiliki dokumen pendukung lengkap (invoice, kontrak, bukti transfer, dll) untuk setiap klaim biaya dan kredit pajak?<br><small>(Tanpa dokumen = klaim ditolak, bahkan jika transaksi nyata)</small></p>
-                    <label><input type="radio" name="q8" value="yes" required> Ya</label>
-                    <label><input type="radio" name="q8" value="no"> Tidak</label>
-                </div>
-                <div class="question-group">
-                    <p class="question-text">9. Apakah perusahaan menghindari pembayaran tunai besar-besaran dan lebih memilih pembayaran non-tunai (transfer, cek, giro)?<br><small>(Pembayaran tunai sulit dipertanggungjawabkan, sering jadi sorotan saat audit)</small></p>
-                    <label><input type="radio" name="q9" value="yes" required> Ya</label>
-                    <label><input type="radio" name="q9" value="no"> Tidak</label>
-                </div>
-                <div class="question-group">
-                    <p class="question-text">10. Apakah laporan keuangan dan SPT tahunan konsisten, tanpa perbedaan signifikan yang tidak dijelaskan?<br><small>(Inkonsistensi = red flag bagi otoritas pajak untuk memulai pemeriksaan)</small></p>
-                    <label><input type="radio" name="q10" value="yes" required> Ya</label>
-                    <label><input type="radio" name="q10" value="no"> Tidak</label>
-                </div>
-            </section>
-
-            <button type="submit">Lihat Hasil Evaluasi</button>
-        </form>
-
-        <div id="result" class="result-box">
-            <h2>📊 Interpretasi Hasil</h2>
-            <p id="resultText"></p>
-        </div>
+  <div class="container">
+    <h1>Evaluasi Strategi Penghematan Pajak & Pencegahan Pemeriksaan</h1>
+    <div id="question-container"></div>
+    <div class="navigation">
+      <button id="prev-btn" class="btn">Sebelumnya</button>
+      <button id="next-btn" class="btn">Selanjutnya</button>
     </div>
-
-    <script src="script.js"></script>
+    <div id="result-container" class="hidden">
+      <h2>Hasil Evaluasi</h2>
+      <p id="result-text"></p>
+    </div>
+  </div>
+  <script src="script.js"></script>
 </body>
 </html>
