@@ -2,22 +2,95 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Evaluasi Strategi Pajak</title>
   <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-  <div class="container">
-    <h1>Evaluasi Strategi Penghematan Pajak & Pencegahan Pemeriksaan</h1>
-    <div id="question-container"></div>
-    <div class="navigation">
-      <button id="prev-btn" class="btn">Sebelumnya</button>
-      <button id="next-btn" class="btn">Selanjutnya</button>
+  <div class="app-container">
+    <div class="header">
+      <div class="logo">
+        <i class="fas fa-calculator"></i>
+        <h1>Evaluasi Strategi Pajak</h1>
+      </div>
+      <div class="progress-container">
+        <div class="progress-bar">
+          <div class="progress-fill" id="progress-fill"></div>
+        </div>
+        <div class="progress-text">
+          Pertanyaan <span id="current-question">1</span> dari <span id="total-questions">10</span>
+        </div>
+      </div>
     </div>
-    <div id="result-container" class="hidden">
-      <h2>Hasil Evaluasi</h2>
-      <p id="result-text"></p>
+
+    <div class="main-container">
+      <div class="content-wrapper">
+        <div id="question-container" class="question-card">
+          <div class="question-number">
+            <span class="number-badge">Q<span id="question-num">1</span></span>
+          </div>
+          <div class="question-text" id="question-text"></div>
+          
+          <div class="options-container">
+            <div class="option-card" data-answer="Ya">
+              <div class="option-icon">
+                <i class="fas fa-check-circle"></i>
+              </div>
+              <div class="option-content">
+                <h3>Ya</h3>
+                <p>Sudah diterapkan sesuai ketentuan</p>
+              </div>
+            </div>
+            
+            <div class="option-card" data-answer="Tidak">
+              <div class="option-icon">
+                <i class="fas fa-times-circle"></i>
+              </div>
+              <div class="option-content">
+                <h3>Tidak</h3>
+                <p>Belum diterapkan atau tidak sesuai</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="result-container" class="result-card hidden">
+          <div class="result-header">
+            <i class="fas fa-chart-bar"></i>
+            <h2>Hasil Evaluasi</h2>
+          </div>
+          <div class="result-content">
+            <div class="score-display">
+              <div class="score-circle">
+                <span id="yes-count">0</span>
+                <small>dari 10</small>
+              </div>
+              <div class="score-label">Jawaban "Ya"</div>
+            </div>
+            <div class="interpretation" id="result-text"></div>
+            <button class="reset-btn" onclick="resetQuiz()">
+              <i class="fas fa-redo"></i>
+              Ulangi Evaluasi
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="navigation">
+        <button id="prev-btn" class="nav-btn prev-btn">
+          <i class="fas fa-arrow-left"></i>
+          Sebelumnya
+        </button>
+        <button id="next-btn" class="nav-btn next-btn">
+          <span id="next-btn-text">Selanjutnya</span>
+          <i class="fas fa-arrow-right"></i>
+        </button>
+      </div>
     </div>
   </div>
+
   <script src="script.js"></script>
 </body>
 </html>
