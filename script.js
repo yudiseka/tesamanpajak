@@ -1,41 +1,99 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('taxEvaluationForm');
-    const resultDiv = document.getElementById('result');
-    const resultText = document.getElementById('resultText');
+const questions = [
+  {
+    text: "Apakah perusahaan memanfaatkan seluruh insentif pajak yang berlaku (seperti PPh Final UMKM 0,5%, pengurangan angsuran, fasilitas PPN, dll) sesuai ketentuan?"
+  },
+  {
+    text: "Apakah biaya operasional yang diklaim sebagai pengurang penghasilan kena pajak benar-benar terjadi, mendukung usaha, dan memiliki bukti yang sah?"
+  },
+  {
+    text: "Apakah perusahaan melakukan penyusutan dan amortisasi aset menurut ketentuan fiskal (bukan hanya akuntansi)?"
+  },
+  {
+    text: "Apakah perusahaan mempertimbangkan waktu transaksi (timing) untuk menunda laba atau mempercepat biaya dalam batas wajar?"
+  },
+  {
+    text: "Apakah struktur penghasilan pemilik (gaji, bonus, dividen) dipertimbangkan dari sisi efisiensi pajak secara keseluruhan?"
+  },
+  {
+    text: "Apakah perusahaan memiliki pemisahan yang jelas antara keuangan pribadi dan keuangan usaha?"
+  },
+  {
+    text: "Apakah semua transaksi dengan pihak terkait (afiliasi, keluarga, atau perusahaan grup) dilakukan dengan harga wajar (arm’s length price)?"
+  },
+  {
+    text: "Apakah perusahaan memiliki dokumen pendukung lengkap (invoice, kontrak, bukti transfer, dll) untuk setiap klaim biaya dan kredit pajak?"
+  },
+  {
+    text: "Apakah perusahaan menghindari pembayaran tunai besar-besaran dan lebih memilih pembayaran non-tunai (transfer, cek, giro)?"
+  },
+  {
+    text: "Apakah laporan keuangan dan SPT tahunan konsisten, tanpa perbedaan signifikan yang tidak dijelaskan?"
+  }
+];
 
-    form.addEventListener('submit', (event) => {
-        event.preventDefault(); // Prevent default form submission
+let answers = new Array(questions.length).fill(null);
+let currentQuestion = 0;
 
-        let yesCount = 0;
-        const totalQuestions = 10; // There are 10 questions (q1 to q10)
+const questionContainer = document.getElementById("question-container");
+const prevBtn = document.getElementById("prev-btn");
+const nextBtn = document.getElementById("next-btn");
+const resultContainer = document.getElementById("result-container");
+const resultText = document.getElementById("result-text");
 
-        for (let i = 1; i <= totalQuestions; i++) {
-            const questionName = `q${i}`;
-            const selectedOption = document.querySelector(`input[name="${questionName}"]:checked`);
+function showQuestion(index) {
+  const question = questions[index];
+  questionContainer.innerHTML = `
+    <div class="question">${question.text}</div>
+    <div class="options">
+      <div class="option ${answers[index] === 'Ya' ? 'selected' : ''}" data-answer="Ya">Ya</div>
+      <div class="option ${answers[index] === 'Tidak' ? 'selected' : ''}" data-answer="Tidak">Tidak</div>
+    </div>
+  `;
 
-            if (!selectedOption) {
-                alert('Harap jawab semua pertanyaan sebelum melihat hasil.');
-                resultDiv.style.display = 'none';
-                return; // Stop execution if any question is not answered
-            }
-
-            if (selectedOption.value === 'yes') {
-                yesCount++;
-            }
-        }
-
-        // Interpretasi Hasil
-        let interpretation = '';
-        if (yesCount >= 9) {
-            interpretation = `Anda menjawab "Ya" untuk ${yesCount} pertanyaan.<br><br>Perusahaan Anda sudah menerapkan strategi efisiensi pajak yang sangat baik dan minim risiko pemeriksaan. Pertahankan dan terus pantau regulasi.`;
-        } else if (yesCount >= 6) {
-            interpretation = `Anda menjawab "Ya" untuk ${yesCount} pertanyaan.<br><br>Sudah ada upaya penghematan dan kehati-hatian, tetapi ada ruang perbaikan dalam dokumentasi, struktur, atau pemanfaatan insentif. Disarankan untuk meninjau area yang belum dijawab "Ya".`;
-        } else {
-            interpretation = `Anda menjawab "Ya" untuk ${yesCount} pertanyaan.<br><br>Perusahaan Anda berpotensi kehilangan penghematan pajak dan berisiko tinggi terhadap pemeriksaan. Disarankan evaluasi menyeluruh terhadap pencatatan, klaim biaya, dan konsistensi pelaporan. Segera cari konsultasi profesional jika diperlukan.`;
-        }
-
-        resultText.innerHTML = interpretation;
-        resultDiv.style.display = 'block'; // Show the result box
-        resultDiv.scrollIntoView({ behavior: 'smooth' }); // Scroll to result
+  document.querySelectorAll(".option").forEach(option => {
+    option.addEventListener("click", () => {
+      document.querySelectorAll(".option").forEach(opt => opt.classList.remove("selected"));
+      option.classList.add("selected");
+      answers[index] = option.getAttribute("data-answer");
     });
+  });
+
+  prevBtn.disabled = index === 0;
+  nextBtn.textContent = index === questions.length - 1 ? "Selesai" : "Selanjutnya";
+}
+
+prevBtn.addEventListener("click", () => {
+  if (currentQuestion > 0) {
+    currentQuestion--;
+    showQuestion(currentQuestion);
+  }
 });
+
+nextBtn.addEventListener("click", () => {
+  if (currentQuestion < questions.length - 1) {
+    currentQuestion++;
+    showQuestion(currentQuestion);
+  } else {
+    showResult();
+  }
+});
+
+function showResult() {
+  const yesCount = answers.filter(a => a === "Ya").length;
+  let interpretation = "";
+
+  if (yesCount >= 9) {
+    interpretation = "Perusahaan sudah menerapkan strategi efisiensi pajak yang baik dan minim risiko pemeriksaan. Pertahankan dan terus pantau regulasi.";
+  } else if (yesCount >= 6) {
+    interpretation = "Sudah ada upaya penghematan dan kehati-hatian, tetapi ada ruang perbaikan dalam dokumentasi, struktur, atau pemanfaatan insentif.";
+  } else {
+    interpretation = "Berpotensi kehilangan penghematan pajak dan berisiko tinggi terhadap pemeriksaan. Disarankan evaluasi menyeluruh terhadap pencatatan, klaim biaya, dan konsistensi pelaporan.";
+  }
+
+  resultText.textContent = `Jawaban "Ya": ${yesCount} dari ${questions.length}\n\n${interpretation}`;
+  questionContainer.classList.add("hidden");
+  resultContainer.classList.remove("hidden");
+  document.querySelector(".navigation").classList.add("hidden");
+}
+
+showQuestion(currentQuestion);
