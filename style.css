@@ -324,4 +324,27 @@ body {
 }
 
 @media (max-width: 768px) {
- 
+  .options-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .navigation {
+    flex-direction: column;
+  }
+  
+  .nav-btn {
+    justify-content: center;
+  }
+  
+  .question-text {
+    font-size: 16px;
+  }
+  
+  .header {
+    padding: 15px;
+  }
+  
+  .question-card, .result-card {
+    padding: 20px;
+  }
+}
